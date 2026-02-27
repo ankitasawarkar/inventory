@@ -36,6 +36,15 @@ export const replicateProduct = (id, copyImages = false) =>
 export const getCategories = () => api.get('/api/categories');
 export const createCategory = (data) => api.post('/api/categories', data);
 
+// Catalog codes (SKU & inventory coding system)
+export const getCatalogCodes = () => api.get('/api/catalog/codes');
+
+// Lookups (centralized dropdown values)
+export const getLookups = (params) => api.get('/api/lookups', { params });
+export const createLookup = (data) => api.post('/api/lookups', data);
+export const updateLookup = (id, data) => api.put(`/api/lookups/${id}`, data);
+export const deleteLookup = (id) => api.delete(`/api/lookups/${id}`);
+
 // Cart
 export const getCart = (cartId) => api.get(`/api/cart/${cartId}`);
 export const addToCart = (cartId, data) => api.post(`/api/cart/${cartId}/items`, data);

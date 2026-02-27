@@ -10,6 +10,8 @@ class Category(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False, index=True)
     slug = Column(String, unique=True, nullable=False, index=True)
+    # Short code used in SKU system, e.g. CH, DIN. Not globally unique to allow reuse.
+    code = Column(String, nullable=True, index=True)
     parent_id = Column(Integer, ForeignKey("categories.id"), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

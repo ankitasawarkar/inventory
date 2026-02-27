@@ -2,7 +2,8 @@
 from app.models.user import User, UserRole
 from app.models.category import Category
 from app.models.product import Product, ProductDevelopmentStage, ProductImage, ProductStatus, StageStatus
-from app.models.inventory import InventoryItem
+from app.models.inventory import InventoryItem, InventoryCategory
+from app.models.lookup import Lookup
 from app.models.order import Order, OrderItem, ProductionRecord, ProfitRecord, OrderStatus
 from app.models.cart import Cart, CartItem
 from app.models.audit import AuditLog
@@ -17,6 +18,8 @@ __all__ = [
     "ProductStatus",
     "StageStatus",
     "InventoryItem",
+    "InventoryCategory",
+    "Lookup",
     "Order",
     "OrderItem",
     "ProductionRecord",

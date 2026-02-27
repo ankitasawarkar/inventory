@@ -3,33 +3,30 @@ from typing import Optional, List
 from datetime import datetime
 
 
-class CategoryBase(BaseModel):
+class InventoryCategoryBase(BaseModel):
     name: str
-    slug: str
-    code: Optional[str] = None
+    code: str
     parent_id: Optional[int] = None
 
 
-class CategoryCreate(CategoryBase):
+class InventoryCategoryCreate(InventoryCategoryBase):
     pass
 
 
-class CategoryUpdate(BaseModel):
+class InventoryCategoryUpdate(BaseModel):
     name: Optional[str] = None
-    slug: Optional[str] = None
     code: Optional[str] = None
     parent_id: Optional[int] = None
 
 
-class CategoryResponse(CategoryBase):
+class InventoryCategoryResponse(InventoryCategoryBase):
     id: int
     created_at: datetime
     updated_at: datetime
-    subcategories: Optional[List['CategoryResponse']] = []
+    children: Optional[List["InventoryCategoryResponse"]] = []
 
     class Config:
         from_attributes = True
 
 
-# For resolving forward references
-CategoryResponse.model_rebuild()
+InventoryCategoryResponse.model_rebuild()

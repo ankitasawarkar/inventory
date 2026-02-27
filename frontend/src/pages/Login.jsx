@@ -31,25 +31,27 @@ function Login() {
   }
 
   return (
-    <div style={{ maxWidth: '400px', margin: '0 auto' }}>
-      <div className="card">
-        <h2>Login to Sagar Furniture</h2>
-        
-        <form onSubmit={handleSubmit} style={{ marginTop: '2rem' }}>
-          <div className="form-group">
-            <label>Username</label>
+    <div className="max-w-md mx-auto">
+      <div className="bg-white rounded-lg shadow p-6">
+        <h2 className="text-xl font-semibold">Login to Sagar Furniture</h2>
+
+        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+          <div className="space-y-1 text-sm">
+            <label className="block font-medium">Username</label>
             <input
               type="text"
+              className="w-full rounded border border-slate-300 px-3 py-2 text-sm"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>
 
-          <div className="form-group">
-            <label>Password</label>
+          <div className="space-y-1 text-sm">
+            <label className="block font-medium">Password</label>
             <input
               type="password"
+              className="w-full rounded border border-slate-300 px-3 py-2 text-sm"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -57,18 +59,20 @@ function Login() {
           </div>
 
           {error && (
-            <div style={{ color: 'red', marginBottom: '1rem' }}>
-              {error}
-            </div>
+            <div className="text-sm text-red-600">{error}</div>
           )}
 
-          <button type="submit" className="btn btn-primary" disabled={loading} style={{ width: '100%' }}>
+          <button
+            type="submit"
+            className="w-full inline-flex justify-center items-center rounded bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-secondary disabled:opacity-60"
+            disabled={loading}
+          >
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
 
-        <div style={{ marginTop: '2rem', fontSize: '0.9rem', color: '#666' }}>
-          <p><strong>Demo Credentials:</strong></p>
+        <div className="mt-6 text-xs text-slate-600 space-y-1">
+          <p className="font-semibold">Demo Credentials:</p>
           <p>Admin: admin / admin123</p>
           <p>Staff: staff / staff123</p>
           <p>Customer: customer / customer123</p>

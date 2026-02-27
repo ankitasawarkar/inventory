@@ -51,6 +51,10 @@ def create_inventory_item(
     # Check if SKU already exists
     if db.query(InventoryItem).filter(InventoryItem.sku == item_data.sku).first():
         raise HTTPException(status_code=400, detail="SKU already exists")
+
+    # Check if item_code already exists (if provided)
+    if item_data.item_code and db.query(InventoryItem).filter(InventoryItem.item_code == item_data.item_code).first():
+        raise HTTPException(status_code=400, detail="Item code already exists")
     
     item = InventoryItem(**item_data.model_dump())
     db.add(item)
@@ -76,6 +80,11 @@ def update_inventory_item(
     if item_data.sku and item_data.sku != item.sku:
         if db.query(InventoryItem).filter(InventoryItem.sku == item_data.sku).first():
             raise HTTPException(status_code=400, detail="SKU already exists")
+
+    # Check item_code uniqueness if being updated
+    if item_data.item_code and item_data.item_code != item.item_code:
+        if db.query(InventoryItem).filter(InventoryItem.item_code == item_data.item_code).first():
+            raise HTTPException(status_code=400, detail="Item code already exists")
     
     update_data = item_data.model_dump(exclude_unset=True)
     for field, value in update_data.items():

@@ -65,6 +65,7 @@ class ProductDevelopmentStageResponse(ProductDevelopmentStageBase):
 class ProductBase(BaseModel):
     title: str
     sku: Optional[str] = None
+    model_code: Optional[str] = None
     category_id: int
     subcategory_id: Optional[int] = None
     description: Optional[str] = None
@@ -80,6 +81,7 @@ class ProductCreate(ProductBase):
 class ProductUpdate(BaseModel):
     title: Optional[str] = None
     sku: Optional[str] = None
+    model_code: Optional[str] = None
     category_id: Optional[int] = None
     subcategory_id: Optional[int] = None
     description: Optional[str] = None
@@ -106,6 +108,7 @@ class ProductListResponse(BaseModel):
     uuid: str
     title: str
     sku: Optional[str] = None
+    model_code: Optional[str] = None
     base_price: condecimal(max_digits=10, decimal_places=2)
     status: ProductStatus
     category_id: int

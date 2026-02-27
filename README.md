@@ -90,6 +90,8 @@ cp .env.example .env
 5. Edit `.env` and set your `SECRET_KEY`:
 ```
 SECRET_KEY=your-super-secret-key-here
+for dev env: python -c "import secrets; print(secrets.token_urlsafe(32))"
+1oDrfti3q4tD22sRQPFzONnmx3kws3drsMr4-jChK1s
 DATABASE_URL=sqlite:///./sagar.db
 MEDIA_ROOT=./media
 ```
@@ -147,6 +149,10 @@ docker-compose exec backend python seed_data.py
 Services will be available at:
 - Backend API: http://localhost:8000
 - Frontend: http://localhost:3000
+
+Restart stack
+- docker-compose down
+- docker-compose up -d
 
 ## 👤 Default Users
 

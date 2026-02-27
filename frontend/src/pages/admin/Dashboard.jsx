@@ -1,24 +1,24 @@
 function AdminDashboard() {
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
-      
-      <div className="grid">
-        <div className="card">
-          <h3>📦 Total Products</h3>
-          <p style={{ fontSize: '2rem', fontWeight: 'bold' }}>0</p>
+    <div className="space-y-6">
+      <h1 className="text-2xl font-semibold">Admin Dashboard</h1>
+
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mt-2">
+        <div className="bg-white rounded-lg shadow p-4">
+          <h3 className="text-sm font-medium mb-1">📦 Total Products</h3>
+          <p className="text-3xl font-bold">0</p>
         </div>
-        <div className="card">
-          <h3>🛒 Active Orders</h3>
-          <p style={{ fontSize: '2rem', fontWeight: 'bold' }}>0</p>
+        <div className="bg-white rounded-lg shadow p-4">
+          <h3 className="text-sm font-medium mb-1">🛒 Active Orders</h3>
+          <p className="text-3xl font-bold">0</p>
         </div>
-        <div className="card">
-          <h3>📊 Production Pipeline</h3>
-          <p style={{ fontSize: '2rem', fontWeight: 'bold' }}>0</p>
+        <div className="bg-white rounded-lg shadow p-4">
+          <h3 className="text-sm font-medium mb-1">📊 Production Pipeline</h3>
+          <p className="text-3xl font-bold">0</p>
         </div>
-        <div className="card">
-          <h3>💰 Monthly Revenue</h3>
-          <p style={{ fontSize: '2rem', fontWeight: 'bold' }}>₹0</p>
+        <div className="bg-white rounded-lg shadow p-4">
+          <h3 className="text-sm font-medium mb-1">💰 Monthly Revenue</h3>
+          <p className="text-3xl font-bold">₹0</p>
         </div>
       </div>
     </div>

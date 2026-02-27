@@ -1,0 +1,111 @@
+{
+  "wood_furniture": {
+    "Living Room": {
+      "Sofas & Seating": [
+        "Teak Wooden Sofa",
+        "Sheesham 3-Seater Couch",
+        "Oak Lounge Chair",
+        "Recliner Wooden Armchair"
+      ],
+      "Tables": [
+        "Solid Wood Coffee Table",
+        "Nested Side Tables",
+        "Sheesham Console Table",
+        "Rustic Center Table"
+      ],
+      "Storage": [
+        "TV Entertainment Unit",
+        "Wooden Bookshelf",
+        "Display Cabinet",
+        "Corner Storage Rack"
+      ]
+    },
+
+    "Bedroom": {
+      "Beds": [
+        "King Size Wooden Bed",
+        "Queen Size Sheesham Bed",
+        "Storage Hydraulic Bed",
+        "Poster Bed"
+      ],
+      "Wardrobes": [
+        "3-Door Wooden Wardrobe",
+        "Sliding Door Wardrobe",
+        "Mirror Wardrobe",
+        "Compact 2-Door Almirah"
+      ],
+      "Side Furniture": [
+        "Bedside Table",
+        "Wooden Dresser",
+        "Chest of Drawers",
+        "Nightstand with Storage"
+      ]
+    },
+
+    "Dining Room": {
+      "Dining Sets": [
+        "6-Seater Wooden Dining Set",
+        "4-Seater Round Dining Table",
+        "Extendable Dining Table",
+        "Live Edge Dining Table"
+      ],
+      "Storage": [
+        "Wooden Crockery Unit",
+        "Buffet Sideboard",
+        "Bar Cabinet",
+        "Wine Rack"
+      ]
+    },
+
+    "Office Furniture": {
+      "Desks": [
+        "Executive Wooden Desk",
+        "Compact Study Table",
+        "Corner Workstation",
+        "Standing Wooden Desk"
+      ],
+      "Chairs": [
+        "Ergonomic Wooden Chair",
+        "Classic Office Chair",
+        "Revolving Wooden Chair",
+        "High-Back Wooden Chair"
+      ],
+      "Storage": [
+        "File Cabinet",
+        "Office Bookshelf",
+        "Document Drawer Unit",
+        "Wooden Storage Credenza"
+      ]
+    },
+
+    "Outdoor Furniture": {
+      "Seating": [
+        "Wooden Garden Bench",
+        "Patio Chair",
+        "Outdoor Swing",
+        "Deck Lounger"
+      ],
+      "Tables": [
+        "Outdoor Dining Table",
+        "Patio Coffee Table",
+        "Garden Side Table",
+        "Folding Picnic Table"
+      ]
+    },
+
+    "Kids Furniture": {
+      "Beds": [
+        "Bunk Bed",
+        "Single Kids Bed",
+        "Wooden Crib",
+        "Playhouse Bed"
+      ],
+      "Study": [
+        "Kids Study Table",
+        "Activity Desk",
+        "Bookshelf for Kids",
+        "Toy Storage Unit"
+      ]
+    }
+  }
+}

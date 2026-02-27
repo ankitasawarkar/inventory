@@ -6,6 +6,10 @@ from datetime import datetime
 class InventoryItemBase(BaseModel):
     name: str
     sku: str
+    item_code: Optional[str] = None
+    material_code: Optional[str] = None
+    category_id: Optional[int] = None
+    subcategory_id: Optional[int] = None
     unit: str
     quantity: condecimal(max_digits=10, decimal_places=2)
     reorder_level: Optional[condecimal(max_digits=10, decimal_places=2)] = None
@@ -19,6 +23,10 @@ class InventoryItemCreate(InventoryItemBase):
 class InventoryItemUpdate(BaseModel):
     name: Optional[str] = None
     sku: Optional[str] = None
+    item_code: Optional[str] = None
+    material_code: Optional[str] = None
+    category_id: Optional[int] = None
+    subcategory_id: Optional[int] = None
     unit: Optional[str] = None
     quantity: Optional[condecimal(max_digits=10, decimal_places=2)] = None
     reorder_level: Optional[condecimal(max_digits=10, decimal_places=2)] = None

@@ -1,0 +1,120 @@
+{
+  "product": {
+    "categories": [
+      {
+        "name": "Chair",
+        "code": "CH",
+        "subcategories": [
+          { "name": "Dining", "code": "DIN" },
+          { "name": "Office", "code": "OFF" },
+          { "name": "Lounge", "code": "LNG" },
+          { "name": "Outdoor", "code": "OUT" }
+        ]
+      },
+      {
+        "name": "Table",
+        "code": "TB",
+        "subcategories": [
+          { "name": "Dining", "code": "DIN" },
+          { "name": "Coffee", "code": "COF" },
+          { "name": "Study", "code": "STD" },
+          { "name": "Side", "code": "SID" }
+        ]
+      },
+      {
+        "name": "Storage",
+        "code": "ST",
+        "subcategories": [
+          { "name": "Wardrobe", "code": "WRD" },
+          { "name": "Cabinet", "code": "CAB" },
+          { "name": "Sideboard", "code": "SBD" },
+          { "name": "Bookshelf", "code": "BSF" }
+        ]
+      },
+      {
+        "name": "Bed",
+        "code": "BD",
+        "subcategories": [
+          { "name": "King", "code": "KNG" },
+          { "name": "Queen", "code": "QEN" },
+          { "name": "Single", "code": "SGL" },
+          { "name": "Bunk", "code": "BNK" }
+        ]
+      }
+    ],
+    "materials": [
+      { "code": "WO", "label": "Wood" },
+      { "code": "MS", "label": "Mild Steel" },
+      { "code": "IR", "label": "Iron" },
+      { "code": "GL", "label": "Glass" }
+    ],
+    "finishes": [
+      { "code": "NAT", "label": "Natural" },
+      { "code": "WAL", "label": "Walnut" },
+      { "code": "TEA", "label": "Teak" },
+      { "code": "BLK", "label": "Black" }
+    ],
+    "sizes": {
+      "generic": [
+        { "code": "S", "label": "Small" },
+        { "code": "M", "label": "Medium" },
+        { "code": "L", "label": "Large" }
+      ],
+      "tables": [
+        { "code": "90", "label": "90 cm" },
+        { "code": "120", "label": "120 cm" },
+        { "code": "150", "label": "150 cm" }
+      ],
+      "chairs": [
+        { "code": "STD", "label": "Standard Height" },
+        { "code": "BAR", "label": "Bar Height" }
+      ]
+    }
+  },
+  "inventory": {
+    "categories": [
+      {
+        "name": "Materials",
+        "code": "MAT",
+        "subcategories": [
+          { "name": "Planks", "code": "PLK" },
+          { "name": "Ply", "code": "PLY" },
+          { "name": "Boards", "code": "BRD" }
+        ]
+      },
+      {
+        "name": "Hardware",
+        "code": "HRD",
+        "subcategories": [
+          { "name": "Screws", "code": "SCR" },
+          { "name": "Hinges", "code": "HNG" },
+          { "name": "Bolts", "code": "BLT" }
+        ]
+      },
+      {
+        "name": "Finishes & Chemicals",
+        "code": "FIN",
+        "subcategories": [
+          { "name": "Lacquer", "code": "LAC" },
+          { "name": "Stain", "code": "STN" },
+          { "name": "Primer", "code": "PRM" }
+        ]
+      },
+      {
+        "name": "Packaging",
+        "code": "PKG",
+        "subcategories": [
+          { "name": "Cartons", "code": "CTN" },
+          { "name": "Bubble Wrap", "code": "BUB" },
+          { "name": "Straps", "code": "STP" }
+        ]
+      }
+    ],
+    "material_codes": [
+      { "code": "SAO", "label": "Seasoned Oak" },
+      { "code": "SAA", "label": "Seasoned Acacia" },
+      { "code": "MDF", "label": "Medium Density Fiberboard" },
+      { "code": "PLY18", "label": "18mm Plywood" }
+    ]
+  }
+}

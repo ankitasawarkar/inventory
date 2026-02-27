@@ -3,8 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 from app.db import init_db
-from app.api.v1 import auth, categories, products, cart, orders, inventory, reports
+from app.api.v1 import auth, categories, products, cart, orders, inventory, reports, catalog, inventory_categories, lookups
 from app.config import settings
+from seed_data import seed_database
 
 # Create FastAPI app
 app = FastAPI(
@@ -30,6 +31,9 @@ app.include_router(cart.router)
 app.include_router(orders.router)
 app.include_router(inventory.router)
 app.include_router(reports.router)
+app.include_router(catalog.router)
+app.include_router(inventory_categories.router)
+app.include_router(lookups.router)
 
 # Mount media files
 media_path = Path(settings.MEDIA_ROOT)
@@ -39,8 +43,15 @@ app.mount("/media", StaticFiles(directory=str(media_path)), name="media")
 
 @app.on_event("startup")
 def on_startup():
-    """Initialize database on startup."""
+    """Initialize and seed database on startup."""
     init_db()
+    # Seed with demo users/products/inventory. The seed script is
+    # idempotent and will skip if data already exists.
+    try:
+        seed_database()
+    except Exception as exc:
+        # In production you might want to log this instead of printing.
+        print(f"Database seed failed: {exc}")
 
 
 @app.get("/")

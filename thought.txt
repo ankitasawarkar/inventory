@@ -1,0 +1,6 @@
+docker-compose down -v
+docker-compose up --build
+
+
+
+next add a small admin endpoint to re-seed categories from category.json via API (instead of running the script manually).

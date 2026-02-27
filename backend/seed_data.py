@@ -11,6 +11,7 @@ from app.auth import get_password_hash
 from decimal import Decimal
 
 
+from app.models import Lookup
 def seed_database():
     """Seed the database with initial data."""
     # Initialize database
@@ -19,6 +20,11 @@ def seed_database():
     db = SessionLocal()
     
     try:
+        # If admin user already exists, assume seeding has been done
+        if db.query(User).filter(User.username == "admin").first():
+            print("✅ Database already seeded, skipping.")
+            return
+
         # Create admin user
         admin = User(
             username="admin",
@@ -54,77 +60,94 @@ def seed_database():
         
         db.flush()
         
-        # Create categories
-        categories = [
-            Category(name="Tables", slug="tables"),
-            Category(name="Chairs", slug="chairs"),
-            Category(name="Beds", slug="beds"),
-            Category(name="Cabinets", slug="cabinets"),
-        ]
-        
-        for cat in categories:
-            db.add(cat)
-        
+        # Create categories with coding system
+        chairs = Category(name="Chairs", slug="chairs", code="CH")
+        tables = Category(name="Tables", slug="tables", code="TB")
+        db.add(chairs)
+        db.add(tables)
         db.flush()
-        
-        # Create subcategories
-        dining_table = Category(
-            name="Dining Tables",
-            slug="dining-tables",
-            parent_id=categories[0].id
+
+        dining_chairs = Category(
+            name="Dining Chairs",
+            slug="chairs-dining",
+            code="DIN",
+            parent_id=chairs.id,
         )
-        db.add(dining_table)
-        
-        office_chair = Category(
+        office_chairs = Category(
             name="Office Chairs",
-            slug="office-chairs",
-            parent_id=categories[1].id
+            slug="chairs-office",
+            code="OFF",
+            parent_id=chairs.id,
         )
-        db.add(office_chair)
-        
+        study_tables = Category(
+            name="Study Tables",
+            slug="tables-study",
+            code="STD",
+            parent_id=tables.id,
+        )
+        dining_tables = Category(
+            name="Dining Tables",
+            slug="tables-dining",
+            code="DIN",
+            parent_id=tables.id,
+        )
+        db.add(dining_chairs)
+        db.add(office_chairs)
+        db.add(study_tables)
+        db.add(dining_tables)
         db.flush()
         
         # Create inventory items
         inventory_items = [
             InventoryItem(
-                name="Teak Wood",
-                sku="INV-TEAK-001",
-                unit="kg",
-                quantity=Decimal("500.00"),
-                reorder_level=Decimal("100.00"),
-                cost_per_unit=Decimal("150.00")
-            ),
-            InventoryItem(
-                name="Oak Wood",
-                sku="INV-OAK-001",
-                unit="kg",
-                quantity=Decimal("300.00"),
-                reorder_level=Decimal("80.00"),
-                cost_per_unit=Decimal("200.00")
-            ),
-            InventoryItem(
-                name="Wood Stain - Dark Brown",
-                sku="INV-STAIN-DB",
-                unit="liters",
-                quantity=Decimal("50.00"),
-                reorder_level=Decimal("10.00"),
-                cost_per_unit=Decimal("25.00")
-            ),
-            InventoryItem(
-                name="Wood Varnish",
-                sku="INV-VARNISH-001",
-                unit="liters",
-                quantity=Decimal("40.00"),
-                reorder_level=Decimal("10.00"),
-                cost_per_unit=Decimal("30.00")
-            ),
-            InventoryItem(
-                name="Screws & Bolts Set",
-                sku="INV-BOLT-001",
+                name="Seasoned Oak plank 25mm x 3m",
+                sku="INV-MAT-PLK-SAO-25X3M",
+                item_code="MAT-PLK-SAO-25X3M",
+                material_code="SAO",
                 unit="pcs",
-                quantity=Decimal("1000.00"),
-                reorder_level=Decimal("200.00"),
-                cost_per_unit=Decimal("0.50")
+                quantity=Decimal("120.00"),
+                reorder_level=Decimal("20.00"),
+                cost_per_unit=Decimal("1800.00"),
+            ),
+            InventoryItem(
+                name="Seasoned Acacia plank 20mm x 2.4m",
+                sku="INV-MAT-PLK-SAA-20X24",
+                item_code="MAT-PLK-SAA-20X24",
+                material_code="SAA",
+                unit="pcs",
+                quantity=Decimal("90.00"),
+                reorder_level=Decimal("15.00"),
+                cost_per_unit=Decimal("1300.00"),
+            ),
+            InventoryItem(
+                name="18mm Plywood sheet",
+                sku="INV-MAT-PLY-PLY18-8X4",
+                item_code="MAT-PLY-PLY18-8X4",
+                material_code="PLY18",
+                unit="pcs",
+                quantity=Decimal("60.00"),
+                reorder_level=Decimal("10.00"),
+                cost_per_unit=Decimal("2200.00"),
+            ),
+            InventoryItem(
+                name="Wood Stain - Walnut",
+                sku="INV-FIN-LAC-WAL-5L",
+                item_code="FIN-LAC-WAL-5L",
+                material_code="WAL",
+                unit="liters",
+                quantity=Decimal("25.00"),
+                reorder_level=Decimal("5.00"),
+                cost_per_unit=Decimal("30.00"),
+            ),
+            InventoryItem(
+                name="Chipboard screws 30mm",
+                sku="INV-HRD-SCR-30MM-BOX",
+                item_code="HRD-SCR-30MM-BOX",
+                material_code="SCR30",
+                unit="pcs",
+                quantity=Decimal("2000.00"),
+                reorder_level=Decimal("400.00"),
+                cost_per_unit=Decimal("0.40"),
             ),
         ]
         
@@ -133,30 +156,32 @@ def seed_database():
         
         db.flush()
         
-        # Create sample products
+        # Create sample products using the new SKU coding system
         product1 = Product(
-            title="Classic Dining Table",
-            sku="PROD-DT-001",
-            category_id=categories[0].id,
-            subcategory_id=dining_table.id,
-            description="A beautiful classic dining table made from solid teak wood",
-            base_price=Decimal("25000.00"),
+            title="Royal Oak Dining Chair",
+            sku="CH-DIN-ROYC-WO-WAL-STD",
+            model_code="ROYC",
+            category_id=chairs.id,
+            subcategory_id=dining_chairs.id,
+            description="Royal Oak dining chair in walnut finish, standard height",
+            base_price=Decimal("8500.00"),
             is_customizable=True,
             status=ProductStatus.READY,
-            created_by=admin.id
+            created_by=admin.id,
         )
         db.add(product1)
-        
+
         product2 = Product(
-            title="Executive Office Chair",
-            sku="PROD-OC-001",
-            category_id=categories[1].id,
-            subcategory_id=office_chair.id,
-            description="Ergonomic office chair with leather upholstery",
-            base_price=Decimal("15000.00"),
+            title="Minimal Study Table",
+            sku="TB-STD-MIST-WO-NAT-120",
+            model_code="MIST",
+            category_id=tables.id,
+            subcategory_id=study_tables.id,
+            description="Minimal wooden study table, 120 cm length, natural finish",
+            base_price=Decimal("12500.00"),
             is_customizable=False,
             status=ProductStatus.DEVELOPMENT,
-            created_by=admin.id
+            created_by=admin.id,
         )
         db.add(product2)
         
@@ -232,6 +257,7 @@ def seed_database():
         for stage in stages:
             db.add(stage)
         
+        seed_lookups(db)
         db.commit()
         print("✅ Database seeded successfully!")
         print("\n📝 Sample Users Created:")
@@ -247,6 +273,50 @@ def seed_database():
     finally:
         db.close()
 
+def seed_lookups(db: Session):
+    """Seed core lookup values for dropdowns (idempotent)."""
+
+    # Simple helper to avoid duplicates
+    def ensure_lookup(set_name: str, key: str, value: str, description: str = "", scope: str = "GLOBAL", order_by: int = 0):
+        existing = (
+            db.query(Lookup)
+            .filter(Lookup.set == set_name, Lookup.key == key)
+            .first()
+        )
+        if existing:
+            return existing
+        item = Lookup(
+            set=set_name,
+            key=key,
+            value=value,
+            description=description or None,
+            scope=scope,
+            order_by=order_by,
+            is_active=True,
+        )
+        db.add(item)
+        return item
+
+    # Units for inventory
+    ensure_lookup("INVENTORY_UNIT", "PCS", "Pieces", "Individual pieces", order_by=1)
+    ensure_lookup("INVENTORY_UNIT", "SQFT", "Square Feet", "Area in square feet", order_by=2)
+    ensure_lookup("INVENTORY_UNIT", "ML", "Milliliters", "Liquid volume", order_by=3)
+
+    # Product finishes
+    ensure_lookup("PRODUCT_FINISH", "NAT", "Natural Finish", order_by=1)
+    ensure_lookup("PRODUCT_FINISH", "WAL", "Walnut Finish", order_by=2)
+    ensure_lookup("PRODUCT_FINISH", "TEK", "Teak Finish", order_by=3)
+
+    # Wood species / material codes
+    ensure_lookup("MATERIAL_CODE", "SAO", "Sheesham A-Grade", order_by=1)
+    ensure_lookup("MATERIAL_CODE", "MDF", "MDF Board", order_by=2)
+    ensure_lookup("MATERIAL_CODE", "PLY18", "18mm Plywood", order_by=3)
+
+    # Generic yes/no
+    ensure_lookup("YES_NO", "Y", "Yes", order_by=1)
+    ensure_lookup("YES_NO", "N", "No", order_by=2)
+
+    db.commit()
 
 if __name__ == "__main__":
     seed_database()

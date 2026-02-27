@@ -26,7 +26,10 @@ class Product(Base):
     id = Column(Integer, primary_key=True, index=True)
     uuid = Column(String, unique=True, nullable=False, default=lambda: str(uuid.uuid4()), index=True)
     title = Column(String, nullable=False, index=True)
+    # Full product code, e.g. CH-DIN-ROYC-WO-WAL-STD
     sku = Column(String, unique=True, nullable=True, index=True)
+    # Short model segment used inside SKU, e.g. ROYC, MIST
+    model_code = Column(String, nullable=True, index=True)
     category_id = Column(Integer, ForeignKey("categories.id"), nullable=False)
     subcategory_id = Column(Integer, ForeignKey("categories.id"), nullable=True)
     description = Column(Text, nullable=True)
